@@ -1,0 +1,46 @@
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            val navController = rememberNavController()
+            NavHost(
+                navController=navController,
+                startDestination = "profile"
+            ){
+                composable("profile"){ Profile(navController =navController )}
+                composable("friendslist"){ FriendsList()}
+            }
+
+        }
+    }
+}
+@Composable
+fun Profile(navController: NavController) {
+    Surface {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "Profile")
+            LaunchedEffect(key1 = true) {
+                delay(4000)
+                navController.popBackStack()
+                navController.navigate("friendslist")
+            }
+        }
+    }
+}
+@Composable
+fun FriendsList(){
+    Surface{
+        Column (
+            modifier=Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Text(text = "FriendsList")
+        }
+    }
+}
