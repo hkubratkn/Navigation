@@ -69,3 +69,24 @@ fun FriendsList(){
         }
     }
 }
+
+
+
+sealed class Screen(val route: String) {
+    object OpenScreen : Screen("open_screen")
+    object SigninScreen : Screen("signin_screen")
+    object LoginScreen : Screen("login_screen")
+    object CompletedScreen : Screen("completed_screen")
+    object ChatScreen : Screen("chat_screen")
+    object UserProfileScreen : Screen("userchat_screen")
+
+    fun withArgs(vararg args: String) : String {
+        return buildString {
+            append(route)
+            args.forEach { arg ->
+                append("/$arg")
+            }
+        }
+    }
+
+}
